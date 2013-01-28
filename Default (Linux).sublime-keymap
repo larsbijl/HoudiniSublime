@@ -1,17 +1,15 @@
 [
-	//
-	// PYTHON keymaps
-	//
-	{ 
-		"keys": ["ctrl+enter"], 
-		"command": "send_to_houdini",
-		"args": {"lang": "python"},
-		"context": [{"key": "selector", "operator": "equal", "operand": "source.python"}]
-	},
-	{ 
-		"keys": ["ctrl+keypad_enter"], 
-		"command": "send_to_houdini",
-		"args": {"lang": "python"},
-		"context": [{"key": "selector", "operator": "equal", "operand": "source.python"}]
-	}
+        //
+        // PYTHON keymaps
+        //
+        { 
+                "keys": ["ctrl+enter"], 
+                "command": "send_to_houdini",
+                "context": [{"key": "selector", "operator": "equal", "operand": "source.python"}]
+        },
+        { 
+                "keys": ["ctrl+keypad_enter"], 
+                "command": "send_to_houdini",
+                "context": [{"key": "selector", "operator": "equal", "operand": "source.python"}]
+        }
 ]

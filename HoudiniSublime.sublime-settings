@@ -1,6 +1,6 @@
 {
-	// Maya commandPort HOST name (127.0.0.1, ...)
+	// Houdini HOST name (127.0.0.1, ...)
 	"houdini_hostname": "127.0.0.1",
-	// Maya commandPort to communicate via Python
+	// Houdini port to communicate via Python
 	"python_port" : 18811
 }
