@@ -7,7 +7,7 @@ import os
 
 _settings = {
     'host' : '127.0.0.1',
-    'py_port' : 18811
+    'port' : 18811
 }
 
 #!/usr/bin/python2.6
@@ -20,7 +20,9 @@ def enableHouModule():
     except ImportError:
         # Add $HFS/houdini/python2.6libs to sys.path so Python can find the
         # hou module.
-        paths = ['/usr/lib/python2.6',os.environ['HFS'] + "/houdini/python%d.%dlibs" % sys.version_info[:2]]
+        lib_path = os.path.join(os.environ['HFS'], "python","lib","python%d.%d" % (sys.version_info[:2]))
+        hou_path = os.path.join(os.environ['HFS'], "houdini","python%d.%dlibs" % (sys.version_info[:2]))
+        paths = [lib_path,hou_path]
         for path in paths:
             if not path in sys.path:
                 sys.path.append(path)
@@ -37,7 +39,7 @@ class SendToHoudiniCommand(sublime_plugin.TextCommand):
         
     def run(self, edit, lang="python"):
         host = _settings['host']
-        port = _settings['py_port']
+        port = _settings['port']
         connection, hou = hrpyc.import_remote_module(server= host,port =port)
 
         for region in self.view.sel():
@@ -54,7 +56,7 @@ def sync_settings():
     global _settings
     so = settings_obj()
     _settings['host'] = so.get('houdini_hostname')
-    _settings['py_port'] = so.get('python_command_port')
+    _settings['port'] = so.get('python_command_port')
 
 settings_obj().clear_on_change("HoudiniSublime.settings")
 settings_obj().add_on_change("HoudiniSublime.settings", sync_settings)
