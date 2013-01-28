@@ -1,0 +1,36 @@
+[
+    {
+        "caption": "Houdini: Send Selection to Houdini",
+        "command": "send_to_houdini"
+    },
+    {
+        "caption": "Preferences: Houdini Settings",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/Houdini/Houdini.sublime-settings"}
+        },
+    {
+        "caption": "Preferences: Houdini Key Bindings",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/Houdini/Default (Windows).sublime-keymap",
+            "platform": "Windows"
+        }
+    },
+    {
+        "caption": "Preferences: Houdini Key Bindings",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/Houdini/Default (OSX).sublime-keymap",
+            "platform": "OSX"
+        }
+    },
+    {
+        "caption": "Preferences: Houdini Key Bindings",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/Houdini/Default (Linux).sublime-keymap",
+            "platform": "Linux"
+        }
+    }
+]

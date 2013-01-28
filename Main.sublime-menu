@@ -1,0 +1,61 @@
+[
+	{
+		"caption": "Preferences",
+		"id": "preferences",
+		"children":
+		[
+			{
+				"caption": "Package Settings",
+				"id": "package-settings",
+				"children":
+				[
+					{
+						"caption": "HoudiniSublime",
+						"children":
+						[
+							{
+								"caption": "Settings – Default",
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/HoudiniSublime/HoudiniSublime.sublime-settings"
+								}
+							},
+							{
+								"caption": "Settings – User",
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/User/HoudiniSublime.sublime-settings"
+								}
+							},
+							{ "caption": "-" },
+							{
+								"caption": "Key Bindings – Default",
+								"platform": "Linux",
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/HoudiniSublime/Default (Linux).sublime-keymap"
+								}
+							},
+							{
+								"caption": "Key Bindings – Default",
+								"platform": "Windows",
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/HoudiniSublime/Default (Windows).sublime-keymap"
+								}
+							},
+							{
+								"caption": "Key Bindings – Default",
+								"platform": "OSX",
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/HoudiniSublime/Default (OSX).sublime-keymap"
+								}
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]
