@@ -1,64 +1,51 @@
-import sublime, sublime_plugin  
-import time
-import re
-import traceback
+from os import environ
+from os.path import join
 import sys
-import os
+import traceback
 
-_settings = {
-    'host' : '127.0.0.1',
-    'port' : 18811
-}
+import sublime
+import sublime_plugin
 
-#!/usr/bin/python2.6
+## Settings
+settings = sublime.load_settings('HoudiniSublime.sublime-settings')
+
+
+class Pref:
+    def load(self):
+        Pref.host = settings.get("houdini_hostname", "127.0.0.1")
+        Pref.port = settings.get("python_port", 18811)
+
+Pref = Pref()
+Pref.load()
+# Setup a callback to reload the setting incase the user changes them.
+settings.add_on_change("HoudiniSublime.settings", Pref.load())
+
+
 def enableHouModule():
     '''Set up the environment so that "import hou" works.'''
-    import sys, os
-
     try:
         import hou
     except ImportError:
         # Add $HFS/houdini/python2.6libs to sys.path so Python can find the
         # hou module.
-        lib_path = os.path.join(os.environ['HFS'], "python","lib","python%d.%d" % (sys.version_info[:2]))
-        hou_path = os.path.join(os.environ['HFS'], "houdini","python%d.%dlibs" % (sys.version_info[:2]))
-        paths = [lib_path,hou_path]
+        lib_path = join(environ['HFS'], "python", "lib", "python%d.%d" % (sys.version_info[:2]))
+        hou_path = join(environ['HFS'], "houdini", "python%d.%dlibs" % (sys.version_info[:2]))
+        paths = [lib_path, hou_path]
         for path in paths:
             if not path in sys.path:
                 sys.path.append(path)
 
 enableHouModule()
-import hou
 import hrpyc
 
+# the meat of the potato.
+# create the client and exec the selected text. this gives you access to the
+# hou object.
 class SendToHoudiniCommand(sublime_plugin.TextCommand):
-    
-    def replace(self, edit, region, result):
-        "Replace the contents of a region with a result converted to a string."
-        self.view.replace(edit, region, str(result))
-        
-    def run(self, edit, lang="python"):
-        host = _settings['host']
-        port = _settings['port']
-        connection, hou = hrpyc.import_remote_module(server= host,port =port)
-
+    def run(self):
+        connection, hou = hrpyc.import_remote_module(server=Pref.host, port=Pref.port)
         for region in self.view.sel():
             try:
                 exec self.view.substr(region)
             except:
                 traceback.print_exc(0)
-
-
-def settings_obj():
-    return sublime.load_settings("HoudiniSublime.sublime-settings")
-
-def sync_settings():
-    global _settings
-    so = settings_obj()
-    _settings['host'] = so.get('houdini_hostname')
-    _settings['port'] = so.get('python_command_port')
-
-settings_obj().clear_on_change("HoudiniSublime.settings")
-settings_obj().add_on_change("HoudiniSublime.settings", sync_settings)
-sync_settings()
-

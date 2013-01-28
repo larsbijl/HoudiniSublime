@@ -1,5 +1,4 @@
 [
-        
         //
         // PYTHON keymaps
         //
@@ -14,23 +13,5 @@
                 "command": "send_to_houdini",
                 "args": {"lang": "python"},
                 "context": [{"key": "selector", "operator": "equal", "operand": "source.python"}]
-        },
-
-        
-        //
-        // MEL keymaps
-        //
-        { 
-                "keys": ["ctrl+enter"], 
-                "command": "send_to_houdini",
-                "args": {"lang": "mel"},
-                "context": [{"key": "selector", "operator": "equal", "operand": "source.mel"}]
-        },
-        { 
-                "keys": ["ctrl+keypad_enter"], 
-                "command": "send_to_houdini",
-                "args": {"lang": "mel"},
-                "context": [{"key": "selector", "operator": "equal", "operand": "source.mel"}]
         }
-
 ]
